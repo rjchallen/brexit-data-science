@@ -1,0 +1,47 @@
+Question,Value,Label
+age,-9a,Not Asked
+age,-8a,Skipped
+gender,1,Male
+gender,2,Female
+gender,8a,Skipped
+gender,9a,Not Asked
+pastvote_EURef,1,I voted to Remain
+pastvote_EURef,2,I voted to Leave
+pastvote_EURef,3,I did not vote
+pastvote_EURef,4,Can't remember
+pastvote_EURef,8a,Skipped
+pastvote_EURef,9a,Not Asked
+Vote2015R,1,Con
+Vote2015R,2,Lab
+Vote2015R,3,Lib Dem
+Vote2015R,4,UKIP
+Vote2015R,5,Green
+Vote2015R,6,Other
+Vote2015R,7,Dont know / Didnt vote
+social_grade,1,ABC1
+social_grade,2,C2DE
+social_grade,8a,Skipped
+social_grade,9a,Not Asked
+govregion,1,London
+govregion,2,Rest of South
+govregion,3,Midlands / Wales
+govregion,4,North
+govregion,5,Scotland
+govregion,8,Northern Ireland
+govregion,9a,Not Asked
+disposition,0,Incomplete
+disposition,1,Complete
+Q1,1,Strongly agree
+Q1,2,Agree
+Q1,3,Not sure
+Q1,4,Disagree
+Q1,5,Strongly disagree
+Q1,8a,Skipped
+Q1,9a,Not Asked
+Q2,1,Definitely vote the same way (or not vote if you did not vote before)
+Q2,2,Probably vote the same way
+Q2,3,Not sure whether to vote the same or differently
+Q2,4,Probably vote differently
+Q2,5,Definitely vote differently (or vote if you did not vote before)
+Q2,8a,Skipped
+Q2,9a,Not Asked

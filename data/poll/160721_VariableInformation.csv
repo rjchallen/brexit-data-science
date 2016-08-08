@@ -1,0 +1,14 @@
+Variable,Position,Label,Measurement Level,Role,Column Width,Alignment,Print Format,Write Format,Missing Values
+ID,1,<none>,Scale,Input,8,Right,F8.2,F8.2,
+age,2,Age,Ordinal,Input,11,Left,F11,F11,"-8, -9"
+gender,3,Gender,Scale,Input,1,Left,F1,F1,"8, 9"
+pastvote_EURef,4,Past vote 2016 EU referendum,Scale,Input,1,Left,F1,F1,"8, 9"
+Vote2015R,5,Vote in 2015_R,Nominal,Input,11,Right,F8.2,F8.2,
+social_grade,6,Social Grade,Scale,Input,1,Left,F1,F1,"8, 9"
+govregion,7,Region,Scale,Input,13,Left,F1,F1,"8, 9"
+W8,8,<none>,Nominal,Input,10,Right,F8.2,F8.2,
+starttime,9,Interview Start Time,Ordinal,Input,23,Left,DATETIME23.2,DATETIME23.2,
+endtime,10,Interview End Time,Ordinal,Input,23,Left,DATETIME23.2,DATETIME23.2,
+disposition,11,Interview Disposition,Scale,Input,1,Left,F1,F1,
+Q1,12,To what extent do you agree or disagree with the following statement?<br/>The advantages to the UK of access to the EU free market outweigh any disadvantages of the free movement of workers across the EU.,Scale,Input,1,Left,F1,F1,"8, 9"
+Q2,13,"If you were asked to vote in a second referendum on EU membership today, would you:",Scale,Input,1,Left,F1,F1,"8, 9"

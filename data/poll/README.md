@@ -1,0 +1,5 @@
+All figures, unless otherwise stated, are from YouGov Plc.  Total sample size was 1,639 adults. Fieldwork was undertaken between 19th - 20th July 2016.  The survey was carried out online. The figures have been weighted and are representative of all GB adults (aged 18+). YouGov is a member of the British Polling Council.
+ 
+This report summarises information collected from online polling undertaken by YouGov of a British sample of over 1600 people aged 18 and over, weighted to account for representativeness.
+ 
+These data were further analysed by [client] using [statistical programme]; direct replication of the statistics featured in this report using the tables published by YouGov may therefore be subject to rounding errors. Any inaccuracies or errors in the further analyses of these data are the sole responsibility of [client]. Direct replication of the statistics featured in this report using the tables published by YouGov may therefore be subject to rounding errors.
