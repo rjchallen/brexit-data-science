@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS raw_population_series (
 )  ENGINE innodb;
 
 LOAD DATA LOCAL INFILE '2015-population-estimates.csv' INTO TABLE raw_population_series
-FIELDS TERMINATED BY ',' 
+FIELDS TERMINATED BY ','  OPTIONALLY ENCLOSED BY '"'
 IGNORE 1 LINES;
 
 
@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS raw_election_result (
 )  ENGINE innodb;
 
 LOAD DATA LOCAL INFILE '2015-election-result.csv' INTO TABLE raw_election_result
-FIELDS TERMINATED BY ',' 
+FIELDS TERMINATED BY ','  OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n'
 IGNORE 1 LINES
 (
@@ -96,8 +96,9 @@ CREATE TABLE IF NOT EXISTS raw_referendum_result (
 ) ENGINE innodb;
 
 LOAD DATA LOCAL INFILE 'EU-referendum-result-data.csv' INTO TABLE raw_referendum_result
-FIELDS TERMINATED BY ',' 
+FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
 IGNORE 1 LINES
 ;
 
@@ -152,7 +153,7 @@ CREATE TABLE IF NOT EXISTS raw_oac_region_area_mapping (
 ) ENGINE innodb;
 
 LOAD DATA LOCAL INFILE '2011-oac-clusters-and-names.csv' INTO TABLE raw_oac_region_area_mapping
-FIELDS TERMINATED BY ',' 
+FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n'
 IGNORE 1 LINES
 (
@@ -171,6 +172,22 @@ IGNORE 1 LINES
 )
 ;
 
+CREATE TABLE IF NOT EXISTS raw_wards_to_lad_mapping (
+	WD14CD VARCHAR(10),
+	WD14NM VARCHAR(75),
+	PCON14CD VARCHAR(10),
+	PCON14NM VARCHAR(75),
+	LAD14CD VARCHAR(10),
+	LAD14NM VARCHAR(75),
+	OBJECTID VARCHAR(10),
+	INDEX (LAD14CD),
+	INDEX (PCON14CD)
+) ENGINE innodb;
+
+LOAD DATA LOCAL INFILE '2014-wards-to-lad-lookup.csv' INTO TABLE raw_wards_to_lad_mapping
+FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
+IGNORE 1 LINES;	
+
 CREATE TABLE IF NOT EXISTS raw_region_mapping (
 	region_code VARCHAR(10),
 	region VARCHAR(40),
@@ -186,7 +203,7 @@ IGNORE 1 LINES
 CREATE TABLE IF NOT EXISTS raw_yougov_poll (
 	id INT,
 	age INT,
-	gender INT,
+	gender VARCHAR(5),
 	pastvote_euref VARCHAR(5),
 	vote2015r VARCHAR(5),
 	social_grade VARCHAR(5),

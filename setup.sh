@@ -7,6 +7,9 @@ pass="$2"
 # http://www.bbc.co.uk/news/uk-politics-eu-referendum-36271589
 
 cd data
+if ! [ -d tmp ]; then
+    mkdir tmp
+fi
 
 if ! [ -f EU-referendum-result-data.csv ]
     then
@@ -52,7 +55,15 @@ if ! [ -f 2011-oac-clusters-and-names.csv ]
     echo "Using cached geographical data"
 fi
 
+if ! [ -f 2014-wards-to-lad-lookup.csv ]
+    then
+    echo "Getting electoral wards data"
+    curl 'http://opengeography.ons.opendata.arcgis.com/datasets/68e5324bd26a4cacba349b4e8e4bc80b_0.csv' -o 2014-wards-to-lad-lookup.csv
+    else
+    echo "Using cached electoral wards data"
+fi
+
 
 mysql -u$1 -p$2 --local-infile < ../sql/buildDb.sql
 
-mysql -u$1 -p$2 --local-infile < ../sql/views.sql
+# mysql -u$1 -p$2 --local-infile < ../sql/views.sql
