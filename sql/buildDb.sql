@@ -4,7 +4,9 @@
 CREATE SCHEMA IF NOT EXISTS brexit_data_science;
 USE brexit_data_science;
 
-CREATE TABLE IF NOT EXISTS raw_population_series (
+DROP TABLE IF EXISTS raw_population_series;
+
+CREATE TABLE raw_population_series (
     lad2014_code VARCHAR(10),
     lad2014_name VARCHAR(40),
     country CHAR,
@@ -27,13 +29,15 @@ CREATE TABLE IF NOT EXISTS raw_population_series (
     population_2015 INT
 )  ENGINE innodb;
 
-LOAD DATA LOCAL INFILE '2015-population-estimates.csv' INTO TABLE raw_population_series
+LOAD DATA LOCAL INFILE 'download/2015-population-estimates.csv' INTO TABLE raw_population_series
 FIELDS TERMINATED BY ','  OPTIONALLY ENCLOSED BY '"'
 IGNORE 1 LINES;
 
 
 # uk election data
-CREATE TABLE IF NOT EXISTS raw_election_result (
+DROP TABLE IF EXISTS raw_election_result;
+
+CREATE TABLE raw_election_result (
 	constituency VARCHAR(40),
 	votes INT,
 	share FLOAT,
@@ -48,7 +52,7 @@ CREATE TABLE IF NOT EXISTS raw_election_result (
 	party_abbreviation VARCHAR(10)
 )  ENGINE innodb;
 
-LOAD DATA LOCAL INFILE '2015-election-result.csv' INTO TABLE raw_election_result
+LOAD DATA LOCAL INFILE 'download/2015-election-result.csv' INTO TABLE raw_election_result
 FIELDS TERMINATED BY ','  OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n'
 IGNORE 1 LINES
@@ -70,8 +74,13 @@ party_name=@PartyName,
 party_abbreviation=@PartyAbbreviation
 ;
 
+# remove summary row
+DELETE FROM raw_election_result WHERE constituency_id='';
+
 # uk election data
-CREATE TABLE IF NOT EXISTS raw_referendum_result (
+DROP TABLE IF EXISTS raw_referendum_result;
+
+CREATE TABLE raw_referendum_result (
 	id VARCHAR(10),
 	region_code VARCHAR(10),
 	region VARCHAR(40),
@@ -95,14 +104,16 @@ CREATE TABLE IF NOT EXISTS raw_referendum_result (
 	pct_rejected FLOAT
 ) ENGINE innodb;
 
-LOAD DATA LOCAL INFILE 'EU-referendum-result-data.csv' INTO TABLE raw_referendum_result
+LOAD DATA LOCAL INFILE 'download/EU-referendum-result-data.csv' INTO TABLE raw_referendum_result
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n'
 IGNORE 1 LINES
 ;
 
-CREATE TABLE IF NOT EXISTS raw_pre_poll_bbc (
+DROP TABLE IF EXISTS raw_pre_poll_bbc;
+
+CREATE TABLE raw_pre_poll_bbc (
 	poll_date DATE,
 	`leave` FLOAT,
 	remain FLOAT,
@@ -118,7 +129,9 @@ IGNORE 1 LINES
 SET poll_date=str_to_date(@col1, '%d %b %Y')
 ;
 
-CREATE TABLE IF NOT EXISTS raw_pre_poll_ft (
+DROP TABLE IF EXISTS raw_pre_poll_ft;
+
+CREATE TABLE raw_pre_poll_ft (
 	poll_date DATE,
 	`leave` FLOAT,
 	remain FLOAT,
@@ -136,7 +149,9 @@ poll_date=str_to_date(@col1, '%b %d, %Y'),
 sample_size=CAST(REPLACE(@col2,',','') AS UNSIGNED)
 ;
 
-CREATE TABLE IF NOT EXISTS raw_oac_region_area_mapping (
+DROP TABLE IF EXISTS raw_oac_region_area_mapping;
+
+CREATE TABLE raw_oac_region_area_mapping (
 	output_area_code VARCHAR(10),
 	local_authority_code VARCHAR(10),
 	local_authority_name VARCHAR(40),
@@ -152,7 +167,7 @@ CREATE TABLE IF NOT EXISTS raw_oac_region_area_mapping (
 	INDEX (region_country_code)
 ) ENGINE innodb;
 
-LOAD DATA LOCAL INFILE '2011-oac-clusters-and-names.csv' INTO TABLE raw_oac_region_area_mapping
+LOAD DATA LOCAL INFILE 'download/2011-oac-clusters-and-names.csv' INTO TABLE raw_oac_region_area_mapping
 FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n'
 IGNORE 1 LINES
@@ -172,7 +187,9 @@ IGNORE 1 LINES
 )
 ;
 
-CREATE TABLE IF NOT EXISTS raw_wards_to_lad_mapping (
+DROP TABLE IF EXISTS raw_wards_to_lad_mapping;
+
+CREATE TABLE raw_wards_to_lad_mapping (
 	WD14CD VARCHAR(10),
 	WD14NM VARCHAR(75),
 	PCON14CD VARCHAR(10),
@@ -184,11 +201,13 @@ CREATE TABLE IF NOT EXISTS raw_wards_to_lad_mapping (
 	INDEX (PCON14CD)
 ) ENGINE innodb;
 
-LOAD DATA LOCAL INFILE '2014-wards-to-lad-lookup.csv' INTO TABLE raw_wards_to_lad_mapping
+LOAD DATA LOCAL INFILE 'download/2014-wards-to-lad-lookup.csv' INTO TABLE raw_wards_to_lad_mapping
 FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
 IGNORE 1 LINES;	
 
-CREATE TABLE IF NOT EXISTS raw_region_mapping (
+DROP TABLE IF EXISTS raw_region_mapping;
+
+CREATE TABLE raw_region_mapping (
 	region_code VARCHAR(10),
 	region VARCHAR(40),
 	yougov_region VARCHAR(5),
@@ -200,7 +219,9 @@ FIELDS TERMINATED BY '\t'
 IGNORE 1 LINES
 ;
 
-CREATE TABLE IF NOT EXISTS raw_yougov_poll (
+DROP TABLE IF EXISTS raw_yougov_poll;
+
+CREATE TABLE raw_yougov_poll (
 	id INT,
 	age INT,
 	gender VARCHAR(5),
@@ -220,7 +241,9 @@ IGNORE 1 LINES
 	id,age,gender,pastvote_euref,vote2015r,social_grade,govregion,w8,@starttime,@endtime,@disposition,q1,q2
 );
 
-CREATE TABLE IF NOT EXISTS raw_yougov_poll_values (
+DROP TABLE IF EXISTS raw_yougov_poll_values;
+
+CREATE TABLE raw_yougov_poll_values (
 	question VARCHAR(20),
 	response VARCHAR(5),
 	label VARCHAR(75),

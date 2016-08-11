@@ -3,7 +3,7 @@ USE brexit_data_science;
 DROP TABLE IF EXISTS yougov_poll;
 
 CREATE TABLE `yougov_poll` (
-  `id` int(11) DEFAULT NULL,
+  `id` int(11) PRIMARY KEY,
   `age` int(11) DEFAULT NULL,
   `age_cat` varchar(5) CHARACTER SET utf8 NOT NULL DEFAULT '',
   `gender` varchar(75) DEFAULT NULL,
@@ -99,28 +99,37 @@ GROUP BY
 
 DROP TABLE IF EXISTS area_region_map;
 
-CREATE TABLE area_region_map AS
-SELECT DISTINCT
-	l.PCON14CD as parliamentary_con_code,
-	l.PCON14NM as parliamentary_con,
-	m.local_authority_code as area_code,
-	m.local_authority_name as area,
-	r.*
-FROM 
-	raw_region_mapping r,
-	raw_oac_region_area_mapping m,
-	raw_wards_to_lad_mapping l
-where r.region_code=m.region_country_code
-and m.local_authority_code=l.LAD14CD
-;
+CREATE TABLE `area_region_map` (
+  `code` varchar(10) PRIMARY KEY,
+  `name` varchar(75) DEFAULT NULL,
+`type` varchar(40) DEFAULT NULL,
+  `region_code` varchar(10) DEFAULT NULL,
+  `region_name` varchar(75) DEFAULT NULL,
+  `yougov_region` varchar(5) DEFAULT NULL,
+  `yougov_region_name` varchar(75) DEFAULT NULL
 
-# Northern Ireland is different
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+# Referendum result areas
+# same as Census aeras apart from NI
 INSERT INTO area_region_map
 SELECT DISTINCT
-	'N92000002' as parliamentary_con_code,
-	'Northern Ireland' as parliamentary_con,
-	p.lad2014_code as area_code,
-	p.lad2014_name as area,
+	rr.area_code,
+	rr.area,
+	'area code',
+	r.*
+FROM
+	raw_referendum_result rr,
+	raw_region_mapping r
+WHERE
+	rr.region_code=r.region_code;
+
+# Census level areas in NI
+INSERT INTO area_region_map
+SELECT DISTINCT
+	p.lad2014_code,
+	p.lad2014_name,
+	'local authority (NI)',
 	r.*
 FROM 
 	raw_population_series p,
@@ -129,18 +138,17 @@ where p.country='N'
 and r.region_code='N92000002'
 ;
 
+# Election results
 INSERT INTO area_region_map
 SELECT DISTINCT
-	constituency_id as parliamentary_con_code,
-	constituency as parliamentary_con,
-	'N92000002' as area_code,
-	'Northern Ireland' as area,
+	constituency_id,
+	constituency,
+	'parliamentary constituency',
 	r.*
 FROM 
 	raw_election_result p,
 	raw_region_mapping r
 where p.region_id=r.region_code
-and r.region_code='N92000002'
 ;
 
 DROP TABLE IF EXISTS regional_demographics;
@@ -151,12 +159,19 @@ CREATE TABLE `regional_demographics` (
   `population` INT DEFAULT NULL,
   `yougov_region` varchar(5) DEFAULT NULL,
   `yougov_region_name` varchar(40) DEFAULT NULL,
-  `percent_population_region` FLOAT DEFAULT NULL
+  `percent_population_region` FLOAT DEFAULT NULL,
+`percent_population_uk` FLOAT DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO regional_demographics
 SELECT 
-	d.gender, d.age_cat, SUM(d.population) as population, m.yougov_region, m.yougov_region_name, SUM(d.population)/t.total*100 as percent_population_region
+	d.gender, 
+	d.age_cat, 
+	SUM(d.population) as population, 
+	m.yougov_region, 
+	m.yougov_region_name, 
+	SUM(d.population)/t.total*100 as percent_population_region,
+	SUM(d.population)/uk.population*100 as percent_population_uk
 FROM 
 	area_demographics d, 
 	area_region_map m,
@@ -165,12 +180,17 @@ FROM
 		area_demographics y, 
 		area_region_map x
 		WHERE
-		x.area_code=y.area_code
+		x.`code`=y.area_code
 		GROUP BY
 		x.yougov_region
-	) t
+	) t,
+	(
+		SELECT SUM(IF(p.population_2015=0,p.population_2014,p.population_2015)) as population
+		FROM `brexit_data_science`.`raw_population_series` p
+		WHERE p.age>16 
+	) uk
 WHERE
-m.area_code=d.area_code
+m.`code`=d.area_code
 AND
 t.yougov_region = m.yougov_region
 GROUP BY
@@ -254,8 +274,7 @@ SELECT
 	el.ld_votes,
 #	el.snp_votes,
 	el.green_votes,
-	el.other_votes,
-	null as turnout_est
+	el.other_votes
 FROM 
 	( 
 		SELECT 
@@ -268,7 +287,7 @@ FROM
 		FROM 
 			raw_population_series p, 
 			area_region_map ar
-		WHERE p.age>16 and p.lad2014_code=ar.area_code
+		WHERE p.age>16 and p.lad2014_code=ar.code
 	) g,
 	( 
 		SELECT 
@@ -283,15 +302,17 @@ FROM
 			)/SUM(IF(q.population_2015=0,q.population_2014,q.population_2015))*100 as percent_males
 		FROM 
 			raw_population_series q, 
-			( SELECT DISTINCT area_code, yougov_region, yougov_region_name from area_region_map ) ar
+			area_region_map ar
 		WHERE 
-			q.age>16 and q.lad2014_code=ar.area_code
+			q.age>16 and q.lad2014_code=ar.`code`
 		GROUP BY
 			ar.yougov_region
 	) h,
 	(
 		SELECT SUM(IF(p.`population_2015`=0,p.`population_2014`,p.`population_2015`)) as uk_total
 		FROM `brexit_data_science`.`raw_population_series` p
+		WHERE 
+			p.age>16
 	) t,
 	(	SELECT 
 			ar.yougov_region,
@@ -301,8 +322,8 @@ FROM
 			SUM(rr.`leave`) as `leave`
 		FROM
 			raw_referendum_result rr,
-			( SELECT DISTINCT area_code, yougov_region, yougov_region_name from area_region_map ) ar
-		WHERE rr.area_code = ar.area_code
+			area_region_map ar
+		WHERE rr.area_code = ar.`code`
 		GROUP BY ar.yougov_region
 	) r,
 	(
@@ -317,9 +338,9 @@ FROM
 			SUM(IF(el.party_abbreviation NOT IN ('Con','Lab','UKIP','LD', /*'SNP',*/ 'Green'),votes,0))/sum(votes)*100 as other_votes
 		FROM
 			raw_election_result el,
-			( SELECT DISTINCT parliamentary_con_code, yougov_region, yougov_region_name from area_region_map ) ar
+			area_region_map ar
 		WHERE
-			el.constituency_id = ar.parliamentary_con_code and el.party_abbreviation <> ""
+			el.constituency_id = ar.code and el.party_abbreviation <> ""
 		GROUP BY ar.yougov_region
 	) el
 	# The areas_codes do not map 1:1 to consitutuencies. This will always result in some inconsistencies and double counting, versus general election stats.
@@ -348,9 +369,9 @@ SELECT
     SUM(IF(p.`pastvote_euref`=1,1,0)) as remain,
 	SUM(IF(p.`pastvote_euref`=2,1,0)) as `leave`,
 	SUM(IF(p.`pastvote_euref`=3,1,0)) as didnt_vote,
-	SUM(IF(p.`pastvote_euref`=1,1,0))/COUNT(*)*100 as percent_remain,
-	SUM(IF(p.`pastvote_euref`=2,1,0))/COUNT(*)*100 as percent_leave,
-	SUM(IF(p.`pastvote_euref`=3,1,0))/COUNT(*)*100 as percent_didnt_vote,
+	SUM(IF(p.`pastvote_euref`=1,1,0))/(COUNT(*)-SUM(IF(p.`pastvote_euref`=4,1,0)))*100 as percent_remain, # 4 - represents a can't remember, these people voted but wont tell which way. They are excluded for the bias analysis.
+	SUM(IF(p.`pastvote_euref`=2,1,0))/(COUNT(*)-SUM(IF(p.`pastvote_euref`=4,1,0)))*100 as percent_leave,
+	SUM(IF(p.`pastvote_euref`=3,1,0))/(COUNT(*)-SUM(IF(p.`pastvote_euref`=4,1,0)))*100 as percent_didnt_vote,
 	SUM(IF(p.vote2015r=1,1,0))/SUM(IF(p.vote2015r in (1,2,3,4,5,6),1,0))*100 as con_votes,
 	SUM(IF(p.vote2015r=2,1,0))/SUM(IF(p.vote2015r in (1,2,3,4,5,6),1,0))*100 as lab_votes,
 	SUM(IF(p.vote2015r=4,1,0))/SUM(IF(p.vote2015r in (1,2,3,4,5,6),1,0))*100 as ukip_votes,
@@ -363,3 +384,6 @@ SELECT
 FROM `brexit_data_science`.`yougov_poll` p,
 	( SELECT COUNT(*) as total FROM  `yougov_poll` ) t
 GROUP BY govregion;
+
+
+
