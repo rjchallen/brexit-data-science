@@ -1,0 +1,51 @@
+caption, table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+table {
+	 width: 100%
+}
+
+caption, th, td {
+    padding: 15px;
+}
+
+th {
+    text-align: left;
+}
+
+tr:nth-child(even) {
+    background-color: #eee;
+}
+tr:nth-child(odd) {
+    background-color: #fff;
+}
+th {
+    background-color: #aaa;
+}
+
+caption {
+	color: #fff;
+	background-color: #000;
+	font-weight: bold;
+}
+
+body {
+	font: 10px sans-serif;
+}
+
+.bar rect {
+	fill: steelblue;
+	shape-rendering: crispEdges;
+}
+
+.bar text {
+	fill: #fff;
+}
+
+.axis path, .axis line {
+	fill: none;
+	stroke: #000;
+	shape-rendering: crispEdges;
+}

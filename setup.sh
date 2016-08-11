@@ -69,8 +69,20 @@ mysql -u$1 -p$2 --local-infile < ../sql/views.sql
 mysql -u$1 -p$2 --local-infile < ../sql/weighting.sql
 # mysql -u$1 -p$2 --local-infile < ../sql/output.sql
 
-if ! [ -d vis ]; then
-	mkdir vis
+if ! [ -d ../html/data ]; then
+	mkdir ../html/data
 fi
 
-mysql -u$1 -p$2 -e "SELECT * FROM brexit_data_science.weighted_yougov_poll" > vis/poll.tsv
+mysql -u$1 -p$2 -e "SELECT * FROM brexit_data_science.weighted_yougov_poll" > ../html/data/poll.tsv
+
+# TODO:replace with harpjs
+cd ../html
+if ! [ -d node_modules/http-server/bin ]; then
+	npm install http-server
+fi
+node node_modules/http-server/bin/http-server &
+
+cutycapt --url=http://localhost:8080/question1.html --out=images/question1.png --delay=100 --min-height=0
+cutycapt --url=http://localhost:8080/question1weighted.html --out=images/question1weighted.png --delay=100 --min-height=0
+
+
