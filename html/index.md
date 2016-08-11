@@ -10,17 +10,17 @@ There is a second assumption that due to the number of votes cast, and the margi
 
 1. [Introduction](#introduction)
 1. [Attitudes to the free market and free movement of people](#attitudes-to-the-free-market-and-free-movement-of-people)
-..1. [Background](#background)
-..1. [Method](#method)
-..1. [Results](#results)
-..1. [Discussion](#discussion)
-..1. [Recommendations](#recommendations)
+  1. [Background](#background)
+  1. [Method](#method)
+  1. [Results](#results)
+  1. [Discussion](#discussion)
+  1. [Recommendations](#recommendations)
 1. [Reliability of the EU referendum result](#reliability-of-the-eu-referendum-result)
-..1. [Background](#background)
-..1. [Method](#method)
-..1. [Results](#results)
-..1. [Discussion](#discussion)
-..1. [Recommendations](#recommendations)
+  1. [Background](#background-1)
+  1. [Method](#method-1)
+  1. [Results](#results-1)
+  1. [Discussion](#discussion-1)
+  1. [Recommendations](#recommendations-1)
 
 ## Introduction
 
