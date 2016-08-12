@@ -80,15 +80,17 @@ Whilst this does not represent an absolute majority of the sample population, if
 
 The implication of this result is that whilst the UK voted to leave the EU, it was not done solely on the basis of concerns over the levels of immigration from the EU. In seems likely that the immigration issue alone would not have been enough to cause the electorate to vote to leave the EU.
 
-When we examine the political breakdown we can see a clear division between the various political parties. Conservative voters are evenly split between agreement and disagreement, UKIP supporters are overwhelmingly in disagreement, and the other political parties (including the SNP in the "other" category) demonstrate clear agreement with the principle that benefits of free trade outweigh disadvantages of free movement of people. This is in line with expectation, based on the political rhetoric of the parties. 
+When we examine the political breakdown we need to be cautious as the smaller sample size of the subdivided groups affects the confidence of our figures. However we can see a clear division between the various political parties. Conservative voters appear evenly split between agreement and disagreement, UKIP supporters are clearly in general disagreement, and the other political parties (including the SNP in the "other" category) demonstrate varying degrees of agreement with the principle that benefits of free trade outweigh disadvantages of free movement of people. This is in line with expectation, based on the political rhetoric of the parties. 
 
-However it does raise an awkward question for the Conservative government and its strategy for negotiation with the EU. How can the Conservative government develop a negotiating position around free trade and free movement of people, that is in line with the attitudes of the whole population demonstrated by this survey, despite their core voters being equivocal on it, and a group of possible target voters being opposed to it. The interests of the whole UK versus the interests of the Conservative party appear to be misaligned, and this could have very far reaching consequences.
+However this split raises an awkward question for the Conservative government and its strategy for negotiation with the EU. How can the Conservative government develop a negotiating position around free trade and free movement of people, that is in line with the attitudes of the whole population demonstrated by this survey, despite their core voters being equivocal on it, and a group of possible target voters being opposed to it. The interests of the whole UK versus the interests of the Conservative party appear to be misaligned, and this could have very far reaching consequences.
 
 ### Recommendations
 
 We've looked at one facet of the decision making around the vote to leave, at a very superficial level. There are likely to be nuances that we cannot pick up with a small sample and affect the most appropriate strategy. 
 
-In this analysis we see that the assumption that the issue of the free movement of people within the EU is a big concern for the electorate is not supported by the evidence. There are other issues such as the cost of EU membership, or erosion of sovereignty, that may well be far more important to the electorate as a whole. It is important that the government actively seeks evidence, about what issues are of central concern to the UK population before they trigger Article 50. 
+In this analysis we see that the assumption that the issue of the free movement of people within the EU is a big concern for the electorate is not supported by the evidence. There are other issues such as the cost of EU membership, or erosion of sovereignty, that may well be far more important to the electorate as a whole. It is important that the government actively seeks evidence, about what issues are of central concern to the UK population before they trigger Article 50.
+
+As the Conservative government are potentially in a conflicted position, it would appear doubly important that they find some concrete evidence to base their decision making on. 
 
 ## Reliability of the EU referendum result
 
