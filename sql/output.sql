@@ -103,17 +103,17 @@ LINES TERMINATED BY '\n';
 DROP VIEW IF EXISTS weight_totals_by_politics;
 
 CREATE VIEW weight_totals_by_politics AS
-SELECT r.vote2015r, COUNT(*) as total, SUM(r.demographic_weight) as demographic_total, SUM(r.combined_weight) as combined_total FROM weighted_yougov_poll r group BY r.vote2015r;
+SELECT r.vote2015r, COUNT(*) as total, SUM(r.demographic_weight) as demographic_total, SUM(r.combined_weight) as combined_total, SUM(r.yougov_weight) as yougov_total FROM weighted_yougov_poll r group BY r.vote2015r;
 
 DROP VIEW IF EXISTS weight_totals_by_referendum_vote;
 
 CREATE VIEW weight_totals_by_referendum_vote AS
-SELECT r.pastvote_euref, COUNT(*) as total, SUM(r.demographic_weight) as demographic_total, SUM(r.combined_weight) as combined_total FROM weighted_yougov_poll r group BY r.pastvote_euref;
+SELECT r.pastvote_euref, COUNT(*) as total, SUM(r.demographic_weight) as demographic_total, SUM(r.combined_weight) as combined_total, SUM(r.yougov_weight) as yougov_total FROM weighted_yougov_poll r group BY r.pastvote_euref;
 
 
 DROP VIEW IF EXISTS question1_by_politics;
 
-CREATE VIEW question1_by_politics as
+/*CREATE VIEW question1_by_politics as
 Select 
 	p.vote2015r_label,
 	p.q1,
@@ -127,7 +127,24 @@ From
 where
 	p.vote2015r=q.vote2015r
 GROUP BY p.vote2015r, p.q1
+;*/
+
+CREATE VIEW question1_by_politics as
+Select 
+	p.vote2015r_label,
+	p.q1,
+	p.q1_label,
+	COUNT(*) as unweighted,
+	percent(SUM(p.yougov_weight),q.yougov_total) as weighted_percent,
+	confidence(SUM(p.yougov_weight),q.yougov_total) as weighted_confidence
+From 
+	weighted_yougov_poll p,
+	weight_totals_by_politics q
+where
+	p.vote2015r=q.vote2015r
+GROUP BY p.vote2015r, p.q1
 ;
+
 
 DROP VIEW IF EXISTS question2_by_politics;
 

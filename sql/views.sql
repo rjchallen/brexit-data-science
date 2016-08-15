@@ -17,7 +17,8 @@ CREATE TABLE `yougov_poll` (
   `vote2015r_label` varchar(75) DEFAULT NULL,
   `govregion` varchar(5) DEFAULT NULL,
   `govregion_label` varchar(75) DEFAULT NULL,
-  `social_grade` varchar(75) DEFAULT NULL
+  `social_grade` varchar(75) DEFAULT NULL,
+  `yougov_weight` FLOAT
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
@@ -35,7 +36,8 @@ p.vote2015r,
 v4.label as vote2015r_label,
 p.govregion,
 v5.label as govregion_label,
-v6.label as social_grade
+v6.label as social_grade,
+p.w8 as yougov_weight
 FROM 
 brexit_data_science.raw_yougov_poll p
 LEFT JOIN brexit_data_science.raw_yougov_poll_values v1 ON (p.q1 = v1.response and v1.question = 'Q1')

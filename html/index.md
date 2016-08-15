@@ -41,13 +41,17 @@ To assess the UK population’s attitude to the UK government's negotiating posi
 
 **"The advantages to the UK of access to the EU free market outweigh any disadvantages of the free movement of workers across the EU."**
 
-With responses on a 5 point Likert scale ("Strongly agree, "Agree", "Not sure", "Disagree", "Strongly disagree"), to a sample of 1638 people using an online survey conducted by YouGov using their daily omnibus service.
+With responses on a 5 point Likert scale ("Strongly agree, "Agree", "Not sure", "Disagree", "Strongly disagree"), to a sample of 1639 people using an online survey conducted by YouGov using their daily omnibus service, on the 19th and 20th of July 2016.
+
+This survey has been conducted using an online interview administered members of the YouGov Plc GB panel of 185,000+ individuals who have agreed to take part in surveys. An email was sent to panellists selected at random from the base sample according to the sample definition, inviting them to take part in the survey and providing a link to the survey. YouGov Plc normally achieves a response rate of between 35% and 50% to surveys however this does vary dependent upon the subject matter, complexity and length of the questionnaire. The responding sample is weighted to the profile of the sample definition to provide a representative reporting sample. The profile is normally derived from census data or, if not available from the census, from industry accepted data.
 
 The sample included some representation from all demographic groups across 6 broad regions of the UK (London, Rest of the South, Midlands and Wales, North of England, Scotland, Northern Ireland). There was some sample bias noted with a moderate underrepresentation of 18-24 year old males in London, and in the Midlands / Wales, and over representation of females of all age groups in the Rest of the South. A weighting was applied to correct this sample bias based on demographics.
 
 The sample included people who voted across the political spectrum in the 2015 general election. The proportions were compared to the known outcome of the election, and a significant underrepresentation of people who did not vote in the last election was noted. This suggests that there is a disengaged cohort in the population that neither voted in the 2015 election nor responds to surveys, and our sample is only really looking at engaged voters. It is likely the statistical significance of this disengaged group affects all results equally, but this is a potential source of bias in the results. The other voting patterns were appropriate and a politic weighting factor has been applied for the sample bias against those that did not vote. 
 
-The other potential biases identified for surveys of this type is a central tendency bias, and agreement bias. It is not possible to control for these given the design of the survey. 
+The other potential biases identified for surveys of this type is a central tendency bias, and agreement bias. It is not possible to control for these given the design of the survey.
+
+All figures, unless otherwise stated, are from YouGov Plc.  Total sample size was 1,639 adults. Fieldwork was undertaken between 19th - 20th July 2016.  The survey was carried out online. The figures have been weighted and are representative of all GB adults (aged 18+). YouGov is a member of the British Polling Council. 
 
 ### Results
 
