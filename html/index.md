@@ -100,6 +100,27 @@ As the Conservative government are potentially in a conflicted position, it woul
 
 ### Results
 
+The top level results for this question shows
+
+![voter volatility][question2]
+
+After applying weighting functions for demographics and political orientation the following weighted results were obtained:
+
+![voter volatility - adjusted][question2weighted]
+
+We can look at these results broken down by the political orientation of the voters based on their reported vote in the 2015 general election. 
+
+![voter volatility - political party breakdown][question2byPolitics]
+
+Or by reported vote in EU referendum. However this cannot be easily interpreted at there is significant reporting bias on the response to the EU referendum vote.
+
+![voter volatility - eu referendum breakdown][question2byReferendumVote]
+
+[question2]: ./images/question2.png
+[question2weighted]: ./images/question2weighted.png
+[question2byPolitics]: ./images/question2byPolitics.png
+[question2byReferendumVote]: ./images/question2byReferendumVote.png
+
 ### Discussion
 
 ### Recommendations
