@@ -85,6 +85,8 @@ fi
 
 node node_modules/harp/bin/harp server html &
 
+sleep 2
+
 cutycapt --url=http://localhost:9000/question1.html --out=html/images/question1.png --delay=100 --min-height=0
 cutycapt --url=http://localhost:9000/question1weighted.html --out=html/images/question1weighted.png --delay=100 --min-height=0
 cutycapt --url=http://localhost:9000/question1byPolitics.html --out=html/images/question1byPolitics.png --delay=100 --min-height=0
