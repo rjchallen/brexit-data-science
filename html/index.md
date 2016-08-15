@@ -1,5 +1,8 @@
 # EU referendum data analysis
 
+DRAFT
+15/8/2016
+
 ## Summary
 
 The EU referendum informed us of what the UK electorate wanted to do on the 23rd June but does not tell us the "why". There seems to be an assumption being made that the control of free movement of workers, was a very important fator in the electorates vote to leave the EU. This assumption influences the nature and tone of the negotiation regarding the UK leaving the EU. To test the validity of this assumption we conducted an online survey of 1683 participants. This survey demonstrates that a significant majority believe that the advantages to the UK of access to the EU free market outweigh any disadvantages of the free movement of workers across the EU (63% agree: 37% disagree). This appears at odds with the current assumptions driving the UK government policy. We recommend that before any negotiations with the EU are started, a much more detailed understanding of the UK electorate's motivations in voting to leave the EU is established. 
