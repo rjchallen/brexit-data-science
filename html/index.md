@@ -6,7 +6,7 @@ DRAFT
 
 ## Summary
 
-The EU referendum told us what the UK electorate wanted to do on the 23rd June. It does not tell us why. There is a widespread assumption that the control of free movement of workers was a very important factor in the electorate's vote to leave the EU. This assumption influences the nature and tone of the negotiation regarding the UK leaving the EU. To test the validity of this assumption we conducted an online survey of 1683 participants using YouGov's omnibus service. The results of this survey demonstrate that a significant majority of participants believe that the advantages to the UK of access to the EU free market outweigh any disadvantages of the free movement of workers across the EU (63% agree: 37% disagree). This seems at odds with the current assumptions driving the UK government policy. We recommend that before any negotiations with the EU are started, a much more detailed understanding of the UK electorate's motivations in voting to leave the EU is established. 
+The EU referendum told us what the UK electorate wanted to do on the 23rd June. It does not tell us why. There is a widespread assumption that the control of free movement of workers was a very important factor in the electorate's vote to leave the EU. This assumption influences the nature and tone of the negotiation regarding the UK leaving the EU. To test the validity of this assumption we conducted an online survey of 1639 participants using YouGov's omnibus service on the 20th July. The results of this survey demonstrate that a significant majority of participants believe that the advantages to the UK of access to the EU free market outweigh any disadvantages of the free movement of workers across the EU (approx 63% agree: 37% disagree). This seems at odds with the current assumptions driving the UK government policy. We recommend that before any negotiations with the EU are started, a much more detailed understanding of the UK electorate's motivations in voting to leave the EU is established. 
 
 ## Contents
 
@@ -21,7 +21,7 @@ The EU referendum told us what the UK electorate wanted to do on the 23rd June. 
 
 The EU referendum vote reflected the attitude of the people to the European Union on the 23th June 2016. As we know the majority of voters elected to leave the EU. Since then there have been a number calls for a second referendum, but the UK government is so far committed to delivering what they believe is the will of the people, and in particular there has been a focus on the control the free movement of people into the UK.
 
-There is an assumption in this position, for which there has been limited evidence. Namely that the referendum result infers that the UK population wishes to control immigration.
+There is an assumption in this position, for which there has been limited evidence. Namely that the referendum result infers that the UK population wishes to control the free movement of people within the EU.
 
 To test this assumption YouGov have conducted an online survey of 1639 people representative of the EU referendum voting population, to try and find evidence to support or refute this assumptions.
 
@@ -41,17 +41,19 @@ To assess the UK population’s attitude to the UK government's negotiating posi
 
 **"The advantages to the UK of access to the EU free market outweigh any disadvantages of the free movement of workers across the EU."**
 
-With responses on a 5 point Likert scale ("Strongly agree, "Agree", "Not sure", "Disagree", "Strongly disagree"), to a sample of 1639 people using an online survey conducted by YouGov using their daily omnibus service, on the 19th and 20th of July 2016.
+With responses on a 5 point Likert scale (**"Strongly agree"**, **"Agree"**, **"Not sure"**, **"Disagree"**, **"Strongly disagree"**), to a sample of 1639 people using an online survey conducted by YouGov using their daily omnibus service, on the 19th and 20th of July 2016.
 
-This survey has been conducted using an online interview administered members of the YouGov Plc GB panel of 185,000+ individuals who have agreed to take part in surveys. An email was sent to panellists selected at random from the base sample according to the sample definition, inviting them to take part in the survey and providing a link to the survey. YouGov Plc normally achieves a response rate of between 35% and 50% to surveys however this does vary dependent upon the subject matter, complexity and length of the questionnaire. The responding sample is weighted to the profile of the sample definition to provide a representative reporting sample. The profile is normally derived from census data or, if not available from the census, from industry accepted data.
+The omnibus service is conducted using an online interview administered to members of the YouGov Plc GB panel of 185,000+ individuals who have agreed to take part in surveys. An email was sent to panellists selected at random from the base sample according to the sample definition, inviting them to take part in the survey and providing a link to the survey. YouGov Plc normally achieves a response rate of between 35% and 50% to surveys however this does vary dependent upon the subject matter, complexity and length of the questionnaire. The responding sample is weighted to the profile of the sample definition to provide a representative reporting sample. The profile is normally derived from census data or, if not available from the census, from industry accepted data.
 
 The sample included some representation from all demographic groups across 6 broad regions of the UK (London, Rest of the South, Midlands and Wales, North of England, Scotland, Northern Ireland). There was some sample bias noted with a moderate underrepresentation of 18-24 year old males in London, and in the Midlands / Wales, and over representation of females of all age groups in the Rest of the South. A weighting was applied to correct this sample bias based on demographics.
 
 The sample included people who voted across the political spectrum in the 2015 general election. The proportions were compared to the known outcome of the election, and a significant underrepresentation of people who did not vote in the last election was noted. This suggests that there is a disengaged cohort in the population that neither voted in the 2015 election nor responds to surveys, and our sample is only really looking at engaged voters. It is likely the statistical significance of this disengaged group affects all results equally, but this is a potential source of bias in the results. The other voting patterns were appropriate and a politic weighting factor has been applied for the sample bias against those that did not vote. 
 
+When looking at the reported voting patterns in the EU referendum we find a strong independent bias towards Remain, even when all the other potential sources of sample bias are corrected for. This appears to be a reporting bias in our sample with far more people reporting that they had voted remain than can have been the case, and an underrepresentation of "did not votes". This level of bias is in contrast to all other parameters, and looks to be a systematic reporting bias. Any result which depends of the reporting of the voters EU referendum vote must be treated with caution, and we have made no conclusions based on that aspect of the data.  
+
 The other potential biases identified for surveys of this type is a central tendency bias, and agreement bias. It is not possible to control for these given the design of the survey.
 
-All figures, unless otherwise stated, are from YouGov Plc.  Total sample size was 1,639 adults. Fieldwork was undertaken between 19th - 20th July 2016.  The survey was carried out online. The figures have been weighted and are representative of all GB adults (aged 18+). YouGov is a member of the British Polling Council. 
+_All figures, unless otherwise stated, are from YouGov Plc.  Total sample size was 1,639 adults. Fieldwork was undertaken between 19th - 20th July 2016.  The survey was carried out online. The figures have been weighted and are representative of all GB adults (aged 18+). YouGov is a member of the British Polling Council._ 
 
 ### Results
 
@@ -59,11 +61,11 @@ The top level results for this question shows
 
 ![attitudes to the free market and free movement of people][question1]
 
-After applying weighting functions for demographics and political orientation the following weighted results were obtained:
+YouGov have applied a weighting function to individuals responses in the sample to correct for small variations in the sample. This is shown in the second column in the following table. YouGov's weighting methodology accounts for divergence of the sample from the observed EU referendum result. As discussed above this appears to be a systematically biased variable. A second weighting function therefore, that does not use this information as part of the weighting has also been constructed which depends only on demographics and political orientation. This is shown in the third column. In subsequent data we have used the YouGov weighting as that produces the most conservative results.
 
 ![attitudes to the free market and free movement of people - adjusted][question1weighted]
 
-We can look at these results broken down by the political orientation of the voters based on their reported vote in the 2015 general election. 
+We can look at these results broken down by the political orientation of the voters based on their reported vote in the 2015 general election. This uses YouGov's weighting algorithm.
 
 ![attitudes to the free market and free movement of people - political party breakdown][question1byPolitics]
 
@@ -73,9 +75,11 @@ We can look at these results broken down by the political orientation of the vot
 
 ### Discussion
 
-This survey shows 40.6% of the population agree that the benefits of free trade with the EU outweigh any disadvantages of free movement of people, and only 23.8% percent disagree, with 35.5% uncertain. 
+This survey shows 41.9% of the sample agree that the benefits of free trade with the EU outweigh any disadvantages of free movement of people, and only 24.7% percent of the sample disagreeing, with 33.4% uncertain. 
 
-Whilst this does not represent an absolute majority of the sample population, if we discount those who are uncertain (in line with the methodology of the EU referendum itself), this represents a 63.0% to 37.0% split in favour of free trade and free movement of people. This is clearly a more significant result than the 51.9% to 48.1% split seen on the 23th June (albeit on a small sample).
+Whilst this does not represent an absolute majority of the sample, if we discount those who are uncertain (in line with the methodology of the EU referendum itself), this represents a 62.9% to 37.1% split in favour of free trade and free movement of people . This is clearly a more significant result than the 51.9% to 48.1% split seen on the 23th June (albeit on a small sample).
+
+From this sample YouGov estimates that 38.0% of population agree, 25.5% disagree and 36.5% are not sure, leading to a weighted percentage of 59.8% to 40.2% of those who have an opinion. As discussed above this weighting probably represents the low end for the "agree" sample. Both corrected and uncorrected show a clear seperation between the 2 groups at a 95% confidence interval. It seems likely that the observed difference between agree and disagree is a statistically significant one. 
 
 The implication of this result is that whilst the UK voted to leave the EU, it was not done solely on the basis of concerns over the free movement of workers within the EU. In seems likely that this issue alone would have been enough to persuade the electorate to vote to leave the EU. This finding is consistent with [Lord Ashcroft's post referendum polls](http://lordashcroftpolls.com/2016/06/how-the-united-kingdom-voted-and-why/) which suggested that "the ability to control our laws" was far more significant that the the immigration question and border control.
 

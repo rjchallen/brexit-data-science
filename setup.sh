@@ -62,38 +62,13 @@ if ! [ -f download/2014-wards-to-lad-lookup.csv ]
     else
     echo "Using cached electoral wards data"
 fi
-
-
-mysql -u$1 -p$2 --local-infile < ../sql/buildDb.sql
-mysql -u$1 -p$2 --local-infile < ../sql/views.sql
-mysql -u$1 -p$2 --local-infile < ../sql/weighting.sql
-mysql -u$1 -p$2 --local-infile < ../sql/output.sql
-
-if ! [ -d ../html/data ]; then
-	mkdir ../html/data
-fi
-
-mysql -u$1 -p$2 -e "SELECT * FROM brexit_data_science.weighted_yougov_poll" > ../html/data/poll.tsv
-mysql -u$1 -p$2 -e "SELECT * FROM brexit_data_science.question1_by_politics" > ../html/data/question1_by_politics.tsv
-mysql -u$1 -p$2 -e "SELECT * FROM brexit_data_science.question2_by_politics" > ../html/data/question2_by_politics.tsv
-mysql -u$1 -p$2 -e "SELECT * FROM brexit_data_science.question2_by_referendum_vote" > ../html/data/question2_by_referendum_vote.tsv
-
 cd ..
-if ! [ -d node_modules/harp/bin/ ]; then
-	npm install harpjs
-fi
 
-node node_modules/harp/bin/harp server html &
+echo "Loading database tables"
+mysql -u$1 -p$2 --local-infile < ../sql/buildDb.sql
+echo "Cleansing data"
+mysql -u$1 -p$2 --local-infile < ../sql/views.sql
+echo "Calculating weightings"
+mysql -u$1 -p$2 --local-infile < ../sql/weighting.sql
 
-sleep 2
-
-cutycapt --url=http://localhost:9000/question1.html --out=html/images/question1.png --delay=100 --min-height=0
-cutycapt --url=http://localhost:9000/question1weighted.html --out=html/images/question1weighted.png --delay=100 --min-height=0
-cutycapt --url=http://localhost:9000/question1byPolitics.html --out=html/images/question1byPolitics.png --delay=100 --min-height=0
-
-
-cutycapt --url=http://localhost:9000/question2.html --out=html/images/question2.png --delay=100 --min-height=0
-cutycapt --url=http://localhost:9000/question2weighted.html --out=html/images/question2weighted.png --delay=100 --min-height=0
-cutycapt --url=http://localhost:9000/question2byPolitics.html --out=html/images/question2byPolitics.png --delay=100 --min-height=0
-cutycapt --url=http://localhost:9000/question2byReferendumVote.html --out=html/images/question2byReferendumVote.png --delay=100 --min-height=0
-
+./localServer.sh $uname $pass

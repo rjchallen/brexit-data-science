@@ -7,9 +7,21 @@
 
 	<script src="https://d3js.org/d3.v4.min.js"></script>
 	<script src="common.js"></script>
+	<script src="lib/d3pie.min.js"></script>
+
+	<div id="table"></div>
+	<div id="pieChart"></div>
 
 	<script>
 
+	function componentToHex(c) {
+	    var hex = Math.floor(c).toString(16);
+	    return hex.length == 1 ? "0" + hex : hex;
+	}
+
+	function rgbToHex(r, g, b) {
+	    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+	}
  
 d3.tsv("data/poll.tsv", function(error, data) {
 	  if (error) throw error;
@@ -31,7 +43,7 @@ d3.tsv("data/poll.tsv", function(error, data) {
 
 	console.log(byQ1); 
 
-	var table = d3.select("body")
+	var table = d3.select("#table")
 		.append("table");
 	table.append("caption").text("The advantages to the UK of access to the EU free market outweigh any disadvantages of the free movement of workers across the EU.");
 	var th = table.append('thead').append("tr");
@@ -54,58 +66,71 @@ d3.tsv("data/poll.tsv", function(error, data) {
 	  .enter().append("td")
 	  .text(function(d) {return d})
 	  
+	var c = -1;
+	var content = byQ1.map(function(d) {c++; return {
+		"item":c,
+		  "label":d.value.label,
+	      "count":d.value.size,
+	      "color":rgbToHex(255/4*c, 255/4*(4-c), 128)
+	  }});
+	  
+	console.log(content);
+	
+	var width = 500;
+    var height = 400;
+    var radius = Math.min(width, height) / 2;
+    
+    var legendRectSize = 18;
+    var legendSpacing = 4;
+    
+    var svg = d3.select('#pieChart')
+      .append('svg')
+      .attr('width', width+200)
+      .attr('height', height)
+      .append('g')
+      .attr('transform', 'translate(' + (width / 2) + 
+        ',' + (height / 2) + ')');
+
+    var arc = d3.arc()
+    	.innerRadius(0)
+      .outerRadius(radius);
+
+    var pie = d3.pie()
+      .value(function(d) { return d.count; })
+      .sort(null);
+
+    var path = svg.selectAll('path')
+      .data(pie(content))
+      .enter()
+      .append('path')
+      .attr('d', arc)
+      .attr('fill', function(d, i) { 
+        return d.data.color;
+      })
+       .style('stroke', '#ffffff');;
+	
+    var legend = svg.selectAll('.legend')
+    .data(content)
+    .enter()
+    .append('g')
+    .attr('class', 'legend')
+    .attr('transform', function(d) {return 'translate('+(width-200+legendRectSize)+','+(d.item*(legendRectSize+legendSpacing)-(height / 2))+')'});
+       
+    legend.append('rect')
+    .attr('width', legendRectSize)
+    .attr('height', legendRectSize)
+    .style('fill', function(d) {return d.color;})
+    .style('stroke', function(d) {return d.color;});
+    
+    legend.append('text')
+    .attr('x', legendRectSize + legendSpacing)
+    .attr('y', legendRectSize - legendSpacing)
+    .text(function(d) { return d.label; });
+    
 });
+		</script>
 
 
-/*var formatCount = d3.format(",.0f");
-
-var margin = {top: 10, right: 30, bottom: 30, left: 30},
-    width = 960 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
-
-var x = d3.scaleLinear()
-    .rangeRound([0, width]);
-
-var bins = d3.histogram()
-    .domain(x.domain())
-    .thresholds(x.ticks(20))
-    (data);
-
-var y = d3.scaleLinear()
-    .domain([0, d3.max(bins, function(d) { return d.length; })])
-    .range([height, 0]);
-
-var svg = d3.select("body").append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-var bar = svg.selectAll(".bar")
-    .data(bins)
-  .enter().append("g")
-    .attr("class", "bar")
-    .attr("transform", function(d) { return "translate(" + x(d.x0) + "," + y(d.length) + ")"; });
-
-bar.append("rect")
-    .attr("x", 1)
-    .attr("width", x(bins[0].x1) - x(bins[0].x0) - 1)
-    .attr("height", function(d) { return height - y(d.length); });
-
-bar.append("text")
-    .attr("dy", ".75em")
-    .attr("y", 6)
-    .attr("x", (x(bins[0].x1) - x(bins[0].x0)) / 2)
-    .attr("text-anchor", "middle")
-    .text(function(d) { return formatCount(d.length); });
-
-svg.append("g")
-    .attr("class", "axis axis--x")
-    .attr("transform", "translate(0," + height + ")")
-    .call(d3.axisBottom(x));*/
-
-
-</script>
 
 
 </body>
