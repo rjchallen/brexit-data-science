@@ -42,6 +42,8 @@ sleep 5
 	cutycapt --url=http://localhost:9000/question2byPolitics.html --out=html/images/question2byPolitics.png --delay=100 --min-height=0
 	cutycapt --url=http://localhost:9000/question2byReferendumVote.html --out=html/images/question2byReferendumVote.png --delay=100 --min-height=0
 	
+	cutycapt --url=http://localhost:9000/index.html --out=html/images/proof.pdf --out-format=pdf --delay=100 --min-height=0
+	
 done
 
 wait $bg_pid
