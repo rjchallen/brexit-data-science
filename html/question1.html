@@ -7,21 +7,13 @@
 
 	<script src="https://d3js.org/d3.v4.min.js"></script>
 	<script src="common.js"></script>
-	<script src="lib/d3pie.min.js"></script>
-
+	
 	<div id="table"></div>
 	<div id="pieChart"></div>
 
 	<script>
 
-	function componentToHex(c) {
-	    var hex = Math.floor(c).toString(16);
-	    return hex.length == 1 ? "0" + hex : hex;
-	}
-
-	function rgbToHex(r, g, b) {
-	    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
-	}
+	
  
 d3.tsv("data/poll.tsv", function(error, data) {
 	  if (error) throw error;
