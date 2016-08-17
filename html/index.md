@@ -5,12 +5,12 @@ Robert Challen
 
 DRAFT
 
-15/8/2016
+17/8/2016
 </div>
 
 # Summary
 
-**_The EU referendum told us what the UK electorate wanted to do on the 23rd June. It does not tell us why. There is a widespread assumption that the control of free movement of workers was a very important factor in the electorate's vote to leave the EU. This assumption influences the nature and tone of the negotiation regarding the UK leaving the EU. To test the validity of this assumption we conducted an online survey of 1639 participants using YouGov's omnibus service on the 20th July. The results of this survey demonstrate that a significant majority of participants believe that the advantages to the UK of access to the EU free market outweigh any disadvantages of the free movement of workers across the EU (approx 63% agree: 37% disagree). This seems at odds with the current assumptions driving the UK government policy. By inference, only one quarter of the population would agree that the UK would benefit by controlling free movement from the EU, even if that resulted in loss of access to the free market. We recommend that before any negotiations with the EU are started, a much more detailed understanding of the UK electorate's motivations in voting to leave the EU is established._** 
+**_The EU referendum told us what the UK electorate wanted to do on the 23rd June. It does not tell us why. There is a widespread assumption that the control of free movement of workers was a very important factor in the electorate's vote to leave the EU. This assumption influences the nature and tone of the negotiation regarding the UK leaving the EU. To test the validity of this assumption we conducted an online survey of 1639 participants using YouGov's omnibus service on the 20th July. The results of this survey demonstrate that a significant majority of participants believe that the advantages to the UK of access to the EU free market outweigh any disadvantages of the free movement of workers across the EU (approx 63% agree: 37% disagree). This seems at odds with the current assumptions driving the UK government policy. By inference, only one quarter of the population would agree that the UK would benefit by controlling free movement from the EU if that resulted in loss of access to the free market. We recommend that before any negotiations with the EU are started, a much more detailed understanding of the UK electorate's motivations in voting to leave the EU is established._** 
 
 # Introduction
 
@@ -84,7 +84,7 @@ Examining the political breakdown we must be cautious as the smaller sample size
 
 This split raises an awkward question for the Conservative government and its strategy for negotiation with the EU. How can the Conservative government develop a negotiating position around free trade and free movement of people, that is in line with the attitudes of the whole population demonstrated by this survey, despite their core voters being equivocal on it, and a group of possible target voters being opposed to it? The interests of the whole UK versus the interests of the Conservative party appear to be misaligned, and this could have very far reaching consequences.
 
-### Recommendations
+# Recommendations
 
 We've looked at one facet of the decision making around the vote to leave, at a very superficial level, and found a significant divergence between the electorate's view and the apparent direction of policy in the UK. This was found in a relatively small sample answering a single question, as a result there are likely to be nuances that we cannot pick up that might influence the qualitative interpretation of this result. We recommend that this result is confirmed on a larger sample, with alternative methodologies. 
 
@@ -94,7 +94,7 @@ In this analysis we see that the assumption that the issue of the free movement 
 
 As the Conservative government are potentially in a conflicted position based on the will of their core voters, versus the will of the population as a whole, it would appear doubly important that they find concrete evidence to base their decision making on, lest they find themselves operating outside of the will of the electorate. 
 
-### Editor's notes
+# Editor's notes
 
 This report summarises information collected from online polling undertaken by YouGov of a British sample of over 1600 people aged 18 and over, weighted to account for representativeness.
 
