@@ -15,6 +15,7 @@ The results of this survey demonstrate that a majority of participants believe t
 This seems at odds with the current assumptions driving the UK government policy.  We recommend that a much more detailed understanding of the UK electorate's motivations in voting to leave the EU is established, before any negotiations with the EU are started.
 
 [Read more...](./detail.md)
+
 [Printable version...](./images/EUReferendumDataAnalysis.pdf)
 
 _Robert Challen_
