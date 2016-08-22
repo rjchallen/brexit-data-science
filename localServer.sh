@@ -11,7 +11,9 @@ fi
 echo "Exporting data for visualisations"
 
 mysql -u$1 -p$2 -e "SELECT * FROM brexit_data_science.weighted_yougov_poll" > html/data/poll.tsv
+mysql -u$1 -p$2 -e "SELECT * FROM brexit_data_science.question1_summary" > html/data/question1_summary.tsv
 mysql -u$1 -p$2 -e "SELECT * FROM brexit_data_science.question1_by_politics" > html/data/question1_by_politics.tsv
+mysql -u$1 -p$2 -e "SELECT * FROM brexit_data_science.question2_summary" > html/data/question2_summary.tsv
 mysql -u$1 -p$2 -e "SELECT * FROM brexit_data_science.question2_by_politics" > html/data/question2_by_politics.tsv
 mysql -u$1 -p$2 -e "SELECT * FROM brexit_data_science.question2_by_referendum_vote" > html/data/question2_by_referendum_vote.tsv
 
@@ -32,17 +34,17 @@ sleep 5
 
 	echo "Capturing visualisations"
 
-	cutycapt --url=http://localhost:9000/question1.html --out=html/images/question1.png --delay=100 --min-height=0
+	cutycapt --url=http://localhost:9000/question1summary.html --out=html/images/question1summary.png --delay=100 --min-height=0
 	cutycapt --url=http://localhost:9000/question1weighted.html --out=html/images/question1weighted.png --delay=100 --min-height=0
 	cutycapt --url=http://localhost:9000/question1byPolitics.html --out=html/images/question1byPolitics.png --delay=100 --min-height=0
 
 
-	cutycapt --url=http://localhost:9000/question2.html --out=html/images/question2.png --delay=100 --min-height=0
+	cutycapt --url=http://localhost:9000/question2summary.html --out=html/images/question2summary.png --delay=100 --min-height=0
 	cutycapt --url=http://localhost:9000/question2weighted.html --out=html/images/question2weighted.png --delay=100 --min-height=0
 	cutycapt --url=http://localhost:9000/question2byPolitics.html --out=html/images/question2byPolitics.png --delay=100 --min-height=0
 	cutycapt --url=http://localhost:9000/question2byReferendumVote.html --out=html/images/question2byReferendumVote.png --delay=100 --min-height=0
 	
-	cutycapt --url=http://localhost:9000/index.html --out=html/images/proof.pdf --out-format=pdf --delay=100 --min-height=0
+	cutycapt --url=http://localhost:9000/detail.html --out=html/images/EUReferendumDataAnalysis.pdf --out-format=pdf --delay=100 --min-height=0
 	
 done
 

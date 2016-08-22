@@ -35,27 +35,5 @@ body {
 	font: 10px sans-serif;
 }
 
-.bar rect {
-	fill: steelblue;
-	shape-rendering: crispEdges;
-}
-
-.bar text {
-	fill: #fff;
-}
-
-.axis path, .axis line {
-	fill: none;
-	stroke: #000;
-	shape-rendering: crispEdges;
-}
-
-#pieChart {
-	padding-top: 50px;
-    padding-right: 50px;
-    padding-bottom: 50px;
-    padding-left: 50px;
-}
-
 #chart {
 	padding-top: 50px;

@@ -1,4 +1,4 @@
-# EU referendum data analysis
+# EU referendum data analysis - Reliability of the EU referendum result
 
 DRAFT
 15/8/2016
@@ -9,15 +9,6 @@ The EU referendum told us what the UK electorate wanted to do on the 23rd June. 
 
 There is a second assertion that has appeared frequently in the media, that because of the relatively high turnout, and the margin of the leave vote, that the EU referendum is a reliable indicator of the will of the UK electorate. The referendum represents a single point in time, and the liklihood that people vote consistently is a third factor that influences the repeatability of the result. If that voter uncertainty is high then the referendum result may be "volatile" and highly sensitive to change. We conducted a survey to assess voter predictability, by asking whether people would change their vote if they could vote in another referendum. We found some evidence that between 10 and 20% of the voting population would consider changing their vote. These results are very hard to interpret, as there appears to be a isolated and systematic mis-reporting of EU voting behaviour in the sample, with more people claiming to have voted remain than is likely from the referendum result.  
 
-1. [Reliability of the EU referendum result](#reliability-of-the-eu-referendum-result)
-  1. [Background](#background)
-  1. [Method](#method)
-  1. [Results](#results)
-  1. [Discussion](#discussion)
-  1. [Recommendations](#recommendations)
-
-  ## Reliability of the EU referendum result
-
 ### Background
 
 ### Method
@@ -26,7 +17,7 @@ There is a second assertion that has appeared frequently in the media, that beca
 
 The top level results for this question shows
 
-![voter volatility][question2]
+![voter volatility][question2summary]
 
 After applying weighting functions for demographics and political orientation the following weighted results were obtained:
 
@@ -40,7 +31,7 @@ Or by reported vote in EU referendum. However this cannot be easily interpreted 
 
 ![voter volatility - eu referendum breakdown][question2byReferendumVote]
 
-[question2]: ./images/question2.png
+[question2summary]: ./images/question2summary.png
 [question2weighted]: ./images/question2weighted.png
 [question2byPolitics]: ./images/question2byPolitics.png
 [question2byReferendumVote]: ./images/question2byReferendumVote.png

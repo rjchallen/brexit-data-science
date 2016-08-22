@@ -31,9 +31,7 @@ d3.tsv("data/question1_summary.tsv", function(error, data) {
 	var th = table.append('thead').append("tr");
 	th.append("th").text("response");
 	th.append("th").text("count (n="+total+")");
-	th.append("th").text("unweighted percentage (+/- 95% confidence)");
-	th.append("th").text("yougov weighting including EU referendum data (+/- 95% confidence)");
-	th.append("th").text("alternative weighting excluding EU referendum data (+/- 95% confidence)");
+	th.append("th").text("percent");
 	
 	var tr = table.append('tbody').selectAll("tr")
 		.data(data)
@@ -44,12 +42,37 @@ d3.tsv("data/question1_summary.tsv", function(error, data) {
 	  .data( function(d) {
 		  return [d.q1_label,
 				  d.unweighted,
-				  format(d.percent)+" (+/-"+format(d.confidence)+")",
-				  format(d.weighted_percent)+" (+/-"+format(d.weighted_confidence)+")",
-				  format(d.combined_percent)+" (+/-"+format(d.combined_confidence)+")"
+				  format(d.percent)
 				  ]})
 	  .enter().append("td")
 	  .text( function(d) {return d;}) 
+
+	  var chart = c3.generate({
+		    bindto: '#chart',
+		    size: {
+		        height: 400
+		    },
+		    transition: {
+		        duration: 0
+		    },
+		    legend: {
+		        position: 'right'
+		    },
+		    data: {
+		      columns: data.map(function(d) {return [d.q1_label,d.unweighted];}),
+			   type: 'pie',
+			   labels: true,
+			   order: null, 
+			   colors: {
+		            "Strongly agree": '#20C020',
+		            "Agree": '#60C060',
+		            "Not sure": '#C0C0C0',
+		            "Disagree": '#C06060',
+		            "Strongly disagree": '#C02020'
+		        }
+		    }
+		});
+	  
 	  
 });
 

@@ -34,7 +34,6 @@ body {
   text-align: justify;
   hyphens: auto;
 }
-h1,
 h2,
 h3,
 h4,
@@ -47,16 +46,12 @@ h6 {
   font-weight: bold;
   hyphens: none;
 }
-h1:not(.counter-skip):before,
 h2:not(.counter-skip):before,
 h3:not(.counter-skip):before,
 h4:not(.counter-skip):before,
 h5:not(.counter-skip):before,
 h6:not(.counter-skip):before {
   margin-right: 0.5em;
-}
-h1 {
-  font-size: 1.33333333em;
 }
 h2 {
   font-size: 1.33333333em;
@@ -162,14 +157,11 @@ a[href^="#"] {
 body > :first-child {
   counter-reset: page 1;
 }
-h1:not(.counter-skip) {
+h2:not(.counter-skip) {
   counter-increment: section;
 }
-h2:not(.counter-skip) {
-  counter-increment: subsection;
-}
 h3:not(.counter-skip) {
-  counter-increment: subsubsection;
+  counter-increment: subsection;
 }
 h4:not(.counter-skip) {
   counter-increment: subsubsection;
@@ -180,14 +172,11 @@ h5:not(.counter-skip) {
 h6:not(.counter-skip) {
   counter-increment: subsubsubsubsection;
 }
-h1.counter-reset {
+h2.counter-reset {
   counter-reset: section;
 }
-h2.counter-reset {
-  counter-reset: subsection;
-}
 h3.counter-reset {
-  counter-reset: subsubsection;
+  counter-reset: subsection;
 }
 h4.counter-reset {
   counter-reset: subsubsection;
@@ -198,23 +187,20 @@ h5.counter-reset {
 h6.counter-reset {
   counter-reset: subsubsubsubsection;
 }
- h1:not(.counter-skip):before {
+h2:not(.counter-skip):before {
   content: ""  counter(section, decimal) "";
 }
- h2:not(.counter-skip):before {
+h3:not(.counter-skip):before {
   content: ""  counter(section, decimal) '.' counter(subsection, decimal) "";
 }
- h3:not(.counter-skip):before {
+h4:not(.counter-skip):before {
   content: ""  counter(section, decimal) '.' counter(subsection, decimal) '.' counter(subsubsection, decimal) "";
 }
- h4:not(.counter-skip):before {
-  content: ""  counter(section, decimal) '.' counter(subsection, decimal) '.' counter(subsubsection, decimal) '.' counter(subsubsection, decimal) "";
+h5:not(.counter-skip):before {
+  content: ""  counter(section, decimal) '.' counter(subsection, decimal) '.' counter(subsubsection, decimal) '.' counter(subsubsubsection, decimal) "";
 }
- h5:not(.counter-skip):before {
-  content: ""  counter(section, decimal) '.' counter(subsection, decimal) '.' counter(subsubsection, decimal) '.' counter(subsubsection, decimal) '.' counter(subsubsubsection, decimal) "";
-}
- h6:not(.counter-skip):before {
-  content: ""  counter(section, decimal) '.' counter(subsection, decimal) '.' counter(subsubsection, decimal) '.' counter(subsubsection, decimal) '.' counter(subsubsubsection, decimal) '.' counter(subsubsubsubsection, decimal) "";
+h6:not(.counter-skip):before {
+  content: ""  counter(section, decimal) '.' counter(subsection, decimal) '.' counter(subsubsection, decimal) '.' counter(subsubsubsection, decimal) '.' counter(subsubsubsubsection, decimal) "";
 }
 table {
   counter-increment: table;
@@ -357,7 +343,6 @@ cite:before {
   column-break-after: always;
   break-after: always;
 }
-.counter-skip h1:before,
 .counter-skip h2:before,
 .counter-skip h3:before,
 .counter-skip h4:before,
@@ -367,22 +352,18 @@ cite:before {
   margin-right: 0 !important;
   content: "" !important;
 }
-h1,
 h2 {
   margin: 1.33333333em 0 0 0;
 }
-h1 {
-  text-transform: uppercase;
-}
-h1:not(.counter-skip):before {
+h2:not(.counter-skip):before {
   content: "" counter(section) ".";
 }
-h1 + h2,
-h1 + * > h2:first-child {
+h2 + h3,
+h2 + * > h3:first-child {
   margin-top: 0;
 }
-h3,
-h4 {
+h4,
+h5 {
   margin: 1.33333333em 0 0 0;
   font-style: italic;
   font-weight: normal;
@@ -398,7 +379,7 @@ header h2 {
   font-weight: normal;
   text-align: center;
 }
-.title {
+h1 {
   margin: 0 0 0.333em;
   font-family: Helvetica, sans-serif;
   font-size: 18pt;
@@ -509,6 +490,11 @@ cite a {
   counter-increment: definition;
   content: "Definition " counter(definition) ". ";
   font-style: italic;
+}
+img {
+    height: auto; 
+    width: auto; 
+    max-width: 320px; 
 }
 @media screen {
   .authors {

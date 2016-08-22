@@ -1,17 +1,15 @@
 <html>
 <head>
 <meta charset="utf-8">
-<link rel="stylesheet" type="text/css" href="common.css">
+<link rel="stylesheet" type="text/css" href="css/common.css">
 </head>
 <body>
 
-	<script src="https://d3js.org/d3.v4.min.js"></script>
+	<script src="https://d3js.org/d3.v3.min.js"></script>
 	<script src="common.js"></script>
 
 	<script>
 
-	var format = function(d) {return parseFloat(d.weighted_percent).toFixed(1)+"% (+/-"+parseFloat(d.weighted_confidence).toFixed(1)+"%)"};
- 
 d3.tsv("data/question2_by_referendum_vote.tsv", function(error, data) {
 	  if (error) throw error;
 	
@@ -49,11 +47,11 @@ d3.tsv("data/question2_by_referendum_vote.tsv", function(error, data) {
 	var td = tr.selectAll("td")
 	  .data( function(d) {
 		  return [d.key,
-				  d.values.filter(function(d) {return d.q2=="1"}).reduce(function(sum,d) {return format(d);},''),
-				  d.values.filter(function(d) {return d.q2=="2"}).reduce(function(sum,d) {return format(d);},''),
-				  d.values.filter(function(d) {return d.q2=="3"}).reduce(function(sum,d) {return format(d);},''),
-				  d.values.filter(function(d) {return d.q2=="4"}).reduce(function(sum,d) {return format(d);},''),
-				  d.values.filter(function(d) {return d.q2=="5"}).reduce(function(sum,d) {return format(d);},'')
+				  d.values.filter(function(d) {return d.q2=="1"}).reduce(function(sum,d) {return format(d.weighted_percent);},''),
+				  d.values.filter(function(d) {return d.q2=="2"}).reduce(function(sum,d) {return format(d.weighted_percent);},''),
+				  d.values.filter(function(d) {return d.q2=="3"}).reduce(function(sum,d) {return format(d.weighted_percent);},''),
+				  d.values.filter(function(d) {return d.q2=="4"}).reduce(function(sum,d) {return format(d.weighted_percent);},''),
+				  d.values.filter(function(d) {return d.q2=="5"}).reduce(function(sum,d) {return format(d.weighted_percent);},'')
 				  ]})
 	  .enter().append("td")
 	  .text( function(d) {return d;}) 

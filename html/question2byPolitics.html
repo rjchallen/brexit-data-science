@@ -1,17 +1,19 @@
 <html>
 <head>
 <meta charset="utf-8">
-<link rel="stylesheet" type="text/css" href="common.css">
+<link rel="stylesheet" type="text/css" href="css/common.css">
 </head>
 <body>
 
-	<script src="https://d3js.org/d3.v4.min.js"></script>
+	<script src="https://d3js.org/d3.v3.min.js"></script>
 	<script src="common.js"></script>
+	<script src="lib/c3-0.4.11/c3.min.js"></script>
+	
+		<div id="table"></div>
+	<div id="chart"></div>
 
 	<script>
 
-	var format = function(d) {return parseFloat(d.weighted_percent).toFixed(1)+"% (+/-"+parseFloat(d.weighted_confidence).toFixed(1)+"%)"};
- 
 d3.tsv("data/question2_by_politics.tsv", function(error, data) {
 	  if (error) throw error;
 	
@@ -28,7 +30,7 @@ d3.tsv("data/question2_by_politics.tsv", function(error, data) {
 
 	console.log(byQ2); 
 
-	var table = d3.select("body")
+	var table = d3.select("#table")
 		.append("table");
 	table.append("caption").text("If you were asked to vote in a second referendum on EU membership today, would you:");
 	var th = table.append('thead').append("tr");
@@ -49,16 +51,68 @@ d3.tsv("data/question2_by_politics.tsv", function(error, data) {
 	var td = tr.selectAll("td")
 	  .data( function(d) {
 		  return [d.key,
-				  d.values.filter(function(d) {return d.q2=="1"}).reduce(function(sum,d) {return format(d);},''),
-				  d.values.filter(function(d) {return d.q2=="2"}).reduce(function(sum,d) {return format(d);},''),
-				  d.values.filter(function(d) {return d.q2=="3"}).reduce(function(sum,d) {return format(d);},''),
-				  d.values.filter(function(d) {return d.q2=="4"}).reduce(function(sum,d) {return format(d);},''),
-				  d.values.filter(function(d) {return d.q2=="5"}).reduce(function(sum,d) {return format(d);},'')
+				  d.values.filter(function(d) {return d.q2=="1"}).reduce(function(sum,d) {return format(d.weighted_percent);},''),
+				  d.values.filter(function(d) {return d.q2=="2"}).reduce(function(sum,d) {return format(d.weighted_percent);},''),
+				  d.values.filter(function(d) {return d.q2=="3"}).reduce(function(sum,d) {return format(d.weighted_percent);},''),
+				  d.values.filter(function(d) {return d.q2=="4"}).reduce(function(sum,d) {return format(d.weighted_percent);},''),
+				  d.values.filter(function(d) {return d.q2=="5"}).reduce(function(sum,d) {return format(d.weighted_percent);},'')
 				  ]})
 	  .enter().append("td")
 	  .text( function(d) {return d;}) 
 		  //d.value.label+"<br>"+d.value.size+"<br>"+
-	      	
+	   
+	  var chart = c3.generate({
+		    bindto: '#chart',
+		    transition: {
+		        duration: 0
+		    },
+		    axis: {
+		        y: {
+		            tick: {
+		                count: 10
+		            }
+		        }
+		    },
+		    data: {
+		      columns: tr.data().map(function(d) {
+		  			return [d.key,
+				  d.values.filter(function(d) {return d.q2==1}).reduce(function(sum,d) {return d.unweighted;},''),
+				  d.values.filter(function(d) {return d.q2==2}).reduce(function(sum,d) {return d.unweighted;},''),
+				  d.values.filter(function(d) {return d.q2==3}).reduce(function(sum,d) {return d.unweighted;},''),
+				  d.values.filter(function(d) {return d.q2==4}).reduce(function(sum,d) {return d.unweighted;},''),
+				  d.values.filter(function(d) {return d.q2==5}).reduce(function(sum,d) {return d.unweighted;},'')
+				  ]}),
+			   type: 'bar',
+			   labels: true,
+			   colors: {
+		            "Con": '#0087dc',
+		            "Lab": '#dc241f',
+		            "Lib Dem": '#fdbb30',
+		            "UKIP": '#70147a',
+		            "Green": '#78b943',
+		            "Other": '#ffff00',
+		            "Dont know / Didnt vote": '#aaaaaa',
+		        }
+		    },
+		    bar: {
+		        width: {
+		            ratio: 0.8 // this makes bar width 50% of length between ticks
+		        }
+		        // or
+		        //width: 100 // this makes bar width 100px
+		    },
+		    
+		    axis: {
+		        x: {
+		            type: 'category',
+		            categories: ["Definitely vote the same way",
+		                         "Probably vote the same way",
+		                         "Not sure",
+		                         "Probably vote differently",
+		                         "Definitely vote differently"]
+		        }
+		    }
+		});
 	  
 });
 
