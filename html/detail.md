@@ -96,7 +96,7 @@ _Total sample size was 1,639 adults. Fieldwork was undertaken between 19th - 20t
 
 ### About the author
 
-Robert Challen is a health informatician with experience in data science and evidence based medicine. He was motivated to commission this survey and write this report, by the apparent lack of concrete evidence supporting the brexit debate. 
+Robert Challen is a health informatician with experience in data science and evidence based medicine. He was motivated to commission this survey, and write this report, by the apparent lack of concrete evidence supporting the brexit debate. 
 
 
 
