@@ -1,0 +1,85 @@
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="css/common.css">
+<link href="lib/c3-0.4.11/c3.min.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+	<script src="https://d3js.org/d3.v3.min.js"></script>
+	<script src="common.js"></script>
+	<script src="lib/c3-0.4.11/c3.min.js"></script>
+	
+		<div id="table"></div>
+	<div id="chart"></div>
+
+	<script>
+
+ 
+d3.tsv("data/predicted_2016_seats.tsv", function(error, data) {
+	  if (error) throw error;
+	
+	  console.log(data); 
+	  
+	  
+	  
+	var table = d3.select("#table")
+		.append("table");
+	table.append("caption").text("Predicted westminster seats based on changes in voting patterns in Richmond and Witney by elections");
+	var th = table.append('thead').append("tr");
+	th.append("th").text("parts");
+	th.append("th").text("seats in 2015");
+	th.append("th").text("seats in 2016");
+	
+	var tr = table.append('tbody').selectAll("tr")
+		.data(data)
+ 		.enter()
+		.append("tr");
+	
+	var td = tr.selectAll("td")
+	  .data( function(d) {
+		  return [d.party_abbreviation,
+				  d.seats_2015,
+				  d.seats_2016
+				  ]})
+	  .enter().append("td")
+	  .text( function(d) {return d;}) 
+
+/*	  var chart = c3.generate({
+		    bindto: '#chart',
+		    size: {
+		        height: 400
+		    },
+		    legend: {
+		        position: 'right'
+		    },
+		    transition: {
+		        duration: 0
+		    },
+		    data: {
+		      columns: data.map(function(d) {return [d.q2_label,d.unweighted];}),
+			   type: 'pie',
+			   labels: true,
+			   order: null,
+			   
+			   colors: {
+		            "Definitely vote the same way (or not vote if you did not vote before)": '#C0C020',
+		            "Probably vote the same way": '#808060',
+		            "Not sure whether to vote the same or differently": '#608080',
+		            "Probably vote differently": '#40C0C0',
+		            "Definitely vote differently (or vote if you did not vote before)": '#20C0C0'
+		        }
+		    }
+		});*/
+	  
+	  
+});
+
+
+
+
+</script>
+
+
+</body>
+</html>

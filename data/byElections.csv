@@ -1,0 +1,23 @@
+constituency_id,party,party_abbreviation,name,votes,percent,swing
+E14001046,Conservative,Con,Robert Courts,17313,45.0,-15.2
+E14001046,Liberal Democrat,LD,Liz Leffman,11611,30.2,23.4
+E14001046,Labour,Lab,Duncan Enright,5765,15.0,-2.2
+E14001046,Green,Green,Larry Sanders,1363,3.5,-1.6
+E14001046,UKIP,UKIP,Dickie Bird,1354,3.5,-5.7
+E14001046,National Health Action,National H,Helen Salisbury,433,1.1,0.0
+E14001046,Independent,Independen,Daniel Skidmore,151,0.4,0
+E14001046,Monster Raving Loony,Independen,Mad Hatter,129,0.3,0
+E14001046,Independent,Independen,Nicholas Ward,93,0.2,0
+E14001046,Bus-Pass Elvis Party,Independen,David Bishop,61,0.2,0
+E14001046,Eccentric Party,Independen,Lord Toby Jug,59,0.2,0
+E14001046,English Democrats,Independen,Winston McKenzie,52,0.1,0
+E14001046,One Love,Independen,Emilia Arno,44,0.1,0
+E14001046,Independent,Independen,Adam Knight,27,0.1,0
+E14000896,Liberal Democrat,LD,Sarah Olney,20510,49.68,30.41
+E14000896,Independent,Con,Zac Goldsmith,18638,45.15,-9.05
+E14000896,Labour,Lab,Christian Wolmar,1515,3.67,-8.68
+E14000896,Monster Raving Loony,Independen,Howling Laud Hope,184,0.45,0
+E14000896,Independent,Independen,Fiona Syms,173,0.42,0
+E14000896,CPA,Independen,Dominic Stockford,164,0.40,0
+E14000896,Love,Independen,Maharaja Jammu and Kashmir,67,0.16,0
+E14000896,ND,Independen,David Powell,32,0.08,0

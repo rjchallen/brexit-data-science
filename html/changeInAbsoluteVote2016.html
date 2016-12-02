@@ -1,0 +1,60 @@
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="css/common.css">
+<link href="lib/c3-0.4.11/c3.min.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+	<script src="https://d3js.org/d3.v3.min.js"></script>
+	<script src="common.js"></script>
+	<script src="lib/c3-0.4.11/c3.min.js"></script>
+	
+		<div id="table"></div>
+	<div id="chart"></div>
+
+	<script>
+
+ 
+d3.tsv("data/change_2015_2016.tsv", function(error, data) {
+	  if (error) throw error;
+	
+	  console.log(data); 
+	  
+	  
+	  
+	var table = d3.select("#table")
+		.append("table");
+	table.append("caption").text("Votes cast in 2016 by elections versus votes cast in Richmond and Witney in last general election by party");
+	var th = table.append('thead').append("tr");
+	th.append("th").text("Party");
+	th.append("th").text("Votes in 2015 general election");
+	th.append("th").text("Votes in 2016 by elections");
+	th.append("th").text("Ratio");
+	
+	var tr = table.append('tbody').selectAll("tr")
+		.data(data)
+ 		.enter()
+		.append("tr");
+	
+	var td = tr.selectAll("td")
+	  .data( function(d) {
+		  return [d.party_abbreviation,
+				  d.votes_2015,
+				  d.votes_2016,
+				  format(d.change_ratio*100)
+				  ]})
+	  .enter().append("td")
+	  .text( function(d) {return d;}) 
+	  
+	  
+});
+
+
+
+
+</script>
+
+
+</body>
+</html>

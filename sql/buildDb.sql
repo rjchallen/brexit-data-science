@@ -29,7 +29,7 @@ CREATE TABLE raw_population_series (
     population_2015 INT
 )  ENGINE innodb;
 
-LOAD DATA LOCAL INFILE 'download/2015-population-estimates.csv' INTO TABLE raw_population_series
+LOAD DATA LOCAL INFILE 'data/download/2015-population-estimates.csv' INTO TABLE raw_population_series
 FIELDS TERMINATED BY ','  OPTIONALLY ENCLOSED BY '"'
 IGNORE 1 LINES;
 
@@ -38,6 +38,7 @@ IGNORE 1 LINES;
 DROP TABLE IF EXISTS raw_election_result;
 
 CREATE TABLE raw_election_result (
+	candidate VARCHAR(100),
 	constituency VARCHAR(40),
 	votes INT,
 	share FLOAT,
@@ -52,7 +53,7 @@ CREATE TABLE raw_election_result (
 	party_abbreviation VARCHAR(10)
 )  ENGINE innodb;
 
-LOAD DATA LOCAL INFILE 'download/2015-election-result.csv' INTO TABLE raw_election_result
+LOAD DATA LOCAL INFILE 'data/download/2015-election-result.csv' INTO TABLE raw_election_result
 FIELDS TERMINATED BY ','  OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n'
 IGNORE 1 LINES
@@ -60,6 +61,7 @@ IGNORE 1 LINES
 	@Forename,@Surname,@Description,@Constituency,@PANO,@Votes,@Share,@Change,@tmp1,@Incumbent,@tmp2,@ConstituencyID,@RegionID,@County,@Region,@Country,@ConstituencyType,@PartyName,@PartyAbbreviation
 )
 SET 
+candidate=CONCAT(@Surname,", ",@Forename),
 constituency=@Constituency,
 votes=@Votes,
 share=@Share,
@@ -104,11 +106,40 @@ CREATE TABLE raw_referendum_result (
 	pct_rejected FLOAT
 ) ENGINE innodb;
 
-LOAD DATA LOCAL INFILE 'download/EU-referendum-result-data.csv' INTO TABLE raw_referendum_result
+LOAD DATA LOCAL INFILE 'data/download/EU-referendum-result-data.csv' INTO TABLE raw_referendum_result
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n'
 IGNORE 1 LINES
+;
+
+
+# uk election data
+DROP TABLE IF EXISTS estimated_referendum_result_by_consituency;
+
+CREATE TABLE estimated_referendum_result_by_consituency (
+	refno int,
+	constituency_id VARCHAR(10),
+	constituency VARCHAR(40),
+	estimated_leave_proportion FLOAT,
+	known_result FLOAT,
+	figure_to_use FLOAT
+) ENGINE innodb;
+
+LOAD DATA LOCAL INFILE 'data/download/EU-referendum-by-consituency-estimate.csv' INTO TABLE estimated_referendum_result_by_consituency
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES
+(
+	refno,
+	constituency_id,
+	constituency,
+	estimated_leave_proportion,
+	known_result,
+	figure_to_use,
+	@dummy
+)
 ;
 
 DROP TABLE IF EXISTS raw_pre_poll_bbc;
@@ -122,7 +153,7 @@ CREATE TABLE raw_pre_poll_bbc (
 	method VARCHAR(10)
 ) ENGINE innodb;
 
-LOAD DATA LOCAL INFILE 'prePollResultsBBC.tsv' INTO TABLE raw_pre_poll_bbc
+LOAD DATA LOCAL INFILE 'data/prePollResultsBBC.tsv' INTO TABLE raw_pre_poll_bbc
 FIELDS TERMINATED BY '\t' 
 IGNORE 1 LINES
 (@col1, `leave`, remain, dont_know, company, method) 
@@ -140,7 +171,7 @@ CREATE TABLE raw_pre_poll_ft (
 	sample_size INT
 ) ENGINE innodb;
 
-LOAD DATA LOCAL INFILE 'prePollResultsFT.tsv' INTO TABLE raw_pre_poll_ft
+LOAD DATA LOCAL INFILE 'data/prePollResultsFT.tsv' INTO TABLE raw_pre_poll_ft
 FIELDS TERMINATED BY '\t' 
 IGNORE 1 LINES
 (remain, `leave`, dont_know, @col1, company, @col2) 
@@ -167,7 +198,7 @@ CREATE TABLE raw_oac_region_area_mapping (
 	INDEX (region_country_code)
 ) ENGINE innodb;
 
-LOAD DATA LOCAL INFILE 'download/2011-oac-clusters-and-names.csv' INTO TABLE raw_oac_region_area_mapping
+LOAD DATA LOCAL INFILE 'data/download/2011-oac-clusters-and-names.csv' INTO TABLE raw_oac_region_area_mapping
 FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n'
 IGNORE 1 LINES
@@ -201,7 +232,7 @@ CREATE TABLE raw_wards_to_lad_mapping (
 	INDEX (PCON14CD)
 ) ENGINE innodb;
 
-LOAD DATA LOCAL INFILE 'download/2014-wards-to-lad-lookup.csv' INTO TABLE raw_wards_to_lad_mapping
+LOAD DATA LOCAL INFILE 'data/download/2014-wards-to-lad-lookup.csv' INTO TABLE raw_wards_to_lad_mapping
 FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
 IGNORE 1 LINES;	
 
@@ -214,7 +245,7 @@ CREATE TABLE raw_region_mapping (
 	yougov_region_name VARCHAR(40)
 ) ENGINE innodb;
 
-LOAD DATA LOCAL INFILE 'regionMapping.tsv' INTO TABLE raw_region_mapping
+LOAD DATA LOCAL INFILE 'data/regionMapping.tsv' INTO TABLE raw_region_mapping
 FIELDS TERMINATED BY '\t' 
 IGNORE 1 LINES
 ;
@@ -234,7 +265,7 @@ CREATE TABLE raw_yougov_poll (
 	q2 VARCHAR(5)
 ) ENGINE innodb;
 
-LOAD DATA LOCAL INFILE 'poll/160721.csv' INTO TABLE raw_yougov_poll
+LOAD DATA LOCAL INFILE 'data/poll/160721.csv' INTO TABLE raw_yougov_poll
 FIELDS TERMINATED BY ',' 
 IGNORE 1 LINES
 (
@@ -250,7 +281,23 @@ CREATE TABLE raw_yougov_poll_values (
 	UNIQUE INDEX yougov_question_response (question, response)
 ) ENGINE innodb;
 
-LOAD DATA LOCAL INFILE 'poll/160721_VariableValues.csv' INTO TABLE raw_yougov_poll_values
+LOAD DATA LOCAL INFILE 'data/poll/160721_VariableValues.csv' INTO TABLE raw_yougov_poll_values
+FIELDS TERMINATED BY ',' 
+IGNORE 1 LINES
+;
+
+DROP TABLE IF EXISTS 2016_by_elections;
+
+CREATE TABLE 2016_by_elections (
+	constituency_id VARCHAR(10),
+	party  VARCHAR(40),
+	party_abbreviation VARCHAR(10),
+	name  VARCHAR(100),
+	votes  VARCHAR(10),
+	percent FLOAT,
+	swing FLOAT
+) ENGINE innodb;
+LOAD DATA LOCAL INFILE 'data/byElections.csv' INTO TABLE 2016_by_elections
 FIELDS TERMINATED BY ',' 
 IGNORE 1 LINES
 ;

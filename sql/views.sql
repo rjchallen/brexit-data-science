@@ -371,7 +371,7 @@ SELECT
     SUM(IF(p.`pastvote_euref`=1,1,0)) as remain,
 	SUM(IF(p.`pastvote_euref`=2,1,0)) as `leave`,
 	SUM(IF(p.`pastvote_euref`=3,1,0)) as didnt_vote,
-	SUM(IF(p.`pastvote_euref`=1,1,0))/(COUNT(*)-SUM(IF(p.`pastvote_euref`=4,1,0)))*100 as percent_remain, # 4 - represents a can't remember, these people voted but wont tell which way. They are excluded for the bias analysis.
+	SUM(IF(p.`pastvote_euref`=1,1,0))/(COUNT(*)-SUM(IF(p.`pastvote_euref`=4,1,0)))*100 as percent_remain, # 4 - represents a cant remember, these people voted but wont tell which way. They are excluded for the bias analysis.
 	SUM(IF(p.`pastvote_euref`=2,1,0))/(COUNT(*)-SUM(IF(p.`pastvote_euref`=4,1,0)))*100 as percent_leave,
 	SUM(IF(p.`pastvote_euref`=3,1,0))/(COUNT(*)-SUM(IF(p.`pastvote_euref`=4,1,0)))*100 as percent_didnt_vote,
 	SUM(IF(p.vote2015r=1,1,0))/SUM(IF(p.vote2015r in (1,2,3,4,5,6),1,0))*100 as con_votes,
@@ -387,5 +387,104 @@ FROM `brexit_data_science`.`yougov_poll` p,
 	( SELECT COUNT(*) as total FROM  `yougov_poll` ) t
 GROUP BY govregion;
 
+DROP TABLE IF exists change_2015_2016;
+CREATE TABLE change_2015_2016
+SELECT 
+b.party_abbreviation,
+SUM(e.votes) as votes_2015,
+SUM(b.votes) as votes_2016,
+SUM(b.votes)/SUM(e.votes) as change_ratio
+FROM brexit_data_science.2016_by_elections b, raw_election_result e
+where b.constituency_id = e.constituency_id
+and b.party_abbreviation = e.party_abbreviation
+GROUP BY b.party_abbreviation
+;
 
+DROP TABLE IF EXISTS pred_gen_election_2016;
+
+CREATE TABLE pred_gen_election_2016 as
+SELECT 
+r.candidate,
+r.constituency,
+r.votes as votes_2015,
+IF(c.change_ratio IS NULL, r.votes, r.votes*c.change_ratio) as pred_votes_2016,
+r.party_abbreviation
+FROM 
+raw_election_result r LEFT OUTER JOIN brexit_data_science.change_2015_2016 c
+ON c.party_abbreviation = r.party_abbreviation
+;
+
+DROP TABLE IF EXISTS pred_winners_2016;
+CREATE TABLE pred_winners_2016
+SELECT
+a.*
+FROM 
+pred_gen_election_2016 a LEFT OUTER JOIN
+pred_gen_election_2016 b
+ON
+a.constituency = b.constituency
+and 
+a.pred_votes_2016 < b.pred_votes_2016
+WHERE b.pred_votes_2016 is null;
+
+
+DROP TABLE IF EXISTS winners_2015;
+CREATE TABLE winners_2015
+SELECT
+a.*
+FROM 
+pred_gen_election_2016 a LEFT OUTER JOIN
+pred_gen_election_2016 b
+ON
+a.constituency = b.constituency
+and 
+a.votes_2015 < b.votes_2015
+WHERE b.votes_2015 is null;
+
+
+
+DROP TABLE IF EXISTS predicted_2016_seats;
+CREATE TABLE predicted_2016_seats as
+SELECT
+w2016.party_abbreviation,
+seats_2015,
+seats_2016
+FROM 
+(
+SELECT party_abbreviation,
+COUNT(*) as seats_2016
+FROM
+pred_winners_2016
+GROUP BY 
+party_abbreviation
+) w2016
+LEFT OUTER JOIN
+(
+SELECT party_abbreviation,
+COUNT(*) as seats_2015
+FROM
+winners_2015
+GROUP BY 
+party_abbreviation
+) w2015
+ON w2016.party_abbreviation=w2015.party_abbreviation
+order by seats_2016 desc;
+
+
+DROP TABLE IF EXISTS brexit_candidates_predicted_to_lose;
+CREATE TABLE brexit_candidates_predicted_to_lose AS
+select 
+a.constituency,
+a.candidate as incumbent,
+a.party_abbreviation as existing_party,
+b.party_abbreviation as predicted_party,
+b.pred_votes_2016-a.pred_votes_2016 as predicted_margin,
+c.figure_to_use as estimated_leave_vote,
+(1-c.figure_to_use)*IF(a.party_abbreviation in ("Con","Lab"),1,0)*IF(b.party_abbreviation in ("Con","Lab"),0,1)*IF((b.pred_votes_2016-a.pred_votes_2016)>5000,1,0.75) as ordering
+from 
+winners_2015 a, pred_winners_2016 b, estimated_referendum_result_by_consituency c
+where a.constituency = b.constituency
+and b.constituency = c.constituency
+and a.party_abbreviation <> b.party_abbreviation
+order by ordering desc;
 

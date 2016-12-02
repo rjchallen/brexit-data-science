@@ -17,6 +17,12 @@ mysql -u$1 -p$2 -e "SELECT * FROM brexit_data_science.question2_summary" > html/
 mysql -u$1 -p$2 -e "SELECT * FROM brexit_data_science.question2_by_politics" > html/data/question2_by_politics.tsv
 mysql -u$1 -p$2 -e "SELECT * FROM brexit_data_science.question2_by_referendum_vote" > html/data/question2_by_referendum_vote.tsv
 
+mysql -u$1 -p$2 -e "SELECT * FROM brexit_data_science.change_2015_2016" > html/data/change_2015_2016.tsv
+mysql -u$1 -p$2 -e "SELECT * FROM brexit_data_science.predicted_2016_seats" > html/data/predicted_2016_seats.tsv
+mysql -u$1 -p$2 -e "SELECT * FROM brexit_data_science.brexit_candidates_predicted_to_lose" > html/data/brexit_candidates_predicted_to_lose.tsv
+mysql -u$1 -p$2 -e "SELECT * FROM brexit_data_science.top_20_brexit_candidates_predicted_to_lose" > html/data/top_20_brexit_candidates_predicted_to_lose.tsv
+
+
 
 if ! [ -d node_modules/harp/bin/ ]; then
 	echo "Setting up harpjs server"
@@ -45,6 +51,10 @@ sleep 5
 	cutycapt --url=http://localhost:9000/question2byReferendumVote.html --out=html/images/question2byReferendumVote.png --delay=100 --min-height=0
 	
 	cutycapt --url=http://localhost:9000/detail.html --out=html/images/EUReferendumDataAnalysis.pdf --out-format=pdf --delay=100 --min-height=0
+	
+	cutycapt --url=http://localhost:9000/changeInAbsoluteVote2016.html --out=html/images/changeInAbsoluteVote2016.png --delay=100 --min-height=0
+	cutycapt --url=http://localhost:9000/impactOnParliament2016.html --out=html/images/impactOnParliament2016.png --delay=100 --min-height=0
+	cutycapt --url=http://localhost:9000/predictedToLose.html --out=html/images/predictedToLose.png --delay=100 --min-height=0
 	
 done
 

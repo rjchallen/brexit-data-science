@@ -135,3 +135,7 @@ where
 	p.pastvote_euref=q.pastvote_euref
 GROUP BY p.pastvote_euref, p.q2
 ;
+
+DROP VIEW IF EXISTS top_20_brexit_candidates_predicted_to_lose;
+CREATE VIEW top_20_brexit_candidates_predicted_to_lose AS
+SELECT * FROM brexit_candidates_predicted_to_lose LIMIT 20;

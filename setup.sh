@@ -62,13 +62,21 @@ if ! [ -f download/2014-wards-to-lad-lookup.csv ]
     else
     echo "Using cached electoral wards data"
 fi
+
+if ! [ -f download/EU-referendum-by-consituency-estimate.csv ]
+	then
+	echo "Getting leave vote by election ward estimates"
+	wget --no-check-certificate --output-document=download/EU-referendum-by-consituency-estimate.csv https://docs.google.com/spreadsheets/d/1wTK5dV2_YjCMsUYlwg0l48uWWf44sKgG8uFVMv5OWlA/export?format=csv&id=1wTK5dV2_YjCMsUYlwg0l48uWWf44sKgG8uFVMv5OWlA
+	else
+    echo "Using cached leave vote by election ward estimates"
+fi
 cd ..
 
 echo "Loading database tables"
-mysql -u$1 -p$2 --local-infile < ../sql/buildDb.sql
+mysql -u$1 -p$2 --local-infile < sql/buildDb.sql
 echo "Cleansing data"
-mysql -u$1 -p$2 --local-infile < ../sql/views.sql
+mysql -u$1 -p$2 --local-infile < sql/views.sql
 echo "Calculating weightings"
-mysql -u$1 -p$2 --local-infile < ../sql/weighting.sql
+mysql -u$1 -p$2 --local-infile < sql/weighting.sql
 
 ./localServer.sh $uname $pass
